@@ -11,6 +11,28 @@ class Phonebook extends Component {
     this.setState({ [name]: value });
   };
 
+  onSubmitHendler = data => {
+    const contact = {
+      id: nanoid(),
+      name: data.name,
+      number: data.number,
+    };
+
+    const contactName = [];
+
+    for (const contact of this.state.contacts) {
+      contactName.push(contact.name);
+    }
+
+    if (contactName.includes(contact.name)) {
+      alert(`${contact.name} is already in contacts list`);
+      return;
+    }
+
+    this.setState(prevState => ({
+      contacts: [...prevState.contacts, contact],
+    }));
+  };
   handleSubmit = evt => {
     evt.preventDefault();
     //const { name, number } = this.state;
